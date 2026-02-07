@@ -5,11 +5,17 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="850" Width="1375" >
 
-    <StackPanel>
-        <TextBlock Text="Hello, World!" FontSize="24" HorizontalAlignment="Center" Margin="10"/>
-        <Button Content="Click Me" Width="100" Height="30" HorizontalAlignment="Center" Margin="10" Command="{Binding ChangeTitleCommand}"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <CheckBox Content="Allow Button to work" IsChecked="{Binding IsActionEnabled}"/>
-        <Button Content="Click Me" Command="{Binding ClickMeCommand}" Margin="0,10,0,0"/>
-    </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Show View A" Command="{Binding NavigateCommand}" CommandParameter="PageA" Margin="5" Width="100"/>
+            <Button Content="Show View B" Command="{Binding NavigateCommand}" CommandParameter="PageB" Margin="5" Width="100"/>
+        </StackPanel>
+
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion" />
+    </Grid>
 </Window>

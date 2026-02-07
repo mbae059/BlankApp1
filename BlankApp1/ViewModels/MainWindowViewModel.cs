@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Navigation.Regions;
 
 namespace BlankApp1.ViewModels
 {
@@ -12,33 +13,20 @@ namespace BlankApp1.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public DelegateCommand ChangeTitleCommand { get; }
+        private readonly IRegionManager _regionManager;
 
-        public MainWindowViewModel()
+        public DelegateCommand<string> NavigateCommand { get; }
+
+        public MainWindowViewModel(IRegionManager regionManager)
         {
-            ChangeTitleCommand = new DelegateCommand(ExcuteChangeTitle);
-            ClickMeCommand = new DelegateCommand(Execute, CanExecute);
-        }
-        private void ExcuteChangeTitle()
-        {
-            Title = "Title Changed!";
+            _regionManager = regionManager;
+            NavigateCommand = new DelegateCommand<string>(ExcuteNavigate);
         }
 
-        public bool _isActionEnabled;
-        public bool IsActionEnabled
+        private void ExcuteNavigate(string navigatePath)
         {
-            get { return _isActionEnabled; }
-            set {
-                if (SetProperty(ref _isActionEnabled, value))
-                {
-                    ClickMeCommand.RaiseCanExecuteChanged();
-                } 
-            }
+            if (string.IsNullOrEmpty(navigatePath)) return;
+            _regionManager.RequestNavigate("ContentRegion", navigatePath);
         }
-
-        public DelegateCommand ClickMeCommand { get; }
-
-        private void Execute() => Title = "Button Clicked!";
-        private bool CanExecute() => IsActionEnabled;
     }
 }

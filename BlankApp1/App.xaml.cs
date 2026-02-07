@@ -16,7 +16,8 @@ namespace BlankApp1
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterForNavigation<MainWindowDMList>("PageA");
+            containerRegistry.RegisterForNavigation<MainWindowServerList>("PageB");
         }
     }
 }
