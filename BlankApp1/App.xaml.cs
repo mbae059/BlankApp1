@@ -17,10 +17,9 @@ namespace BlankApp1
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<MainWindowDMList>("PageA");
-            containerRegistry.RegisterForNavigation<MainWindowServerList>("PageB");
-
-            containerRegistry.RegisterSingleton<IMessageService, MessageService>();
+            containerRegistry.RegisterForNavigation<MainWindowServerList>("MainWindowServerList");
+            containerRegistry.RegisterForNavigation<MainWindowDMList>("MainWindowDMList");
+            containerRegistry.RegisterForNavigation<MainWindowChat>("MainWindowChat");
         }
     }
 }

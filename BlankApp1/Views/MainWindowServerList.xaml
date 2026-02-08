@@ -6,7 +6,38 @@
              xmlns:local="clr-namespace:BlankApp1.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#FFE0E0">
-        <TextBlock Text="{Binding ServiceMessage}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30"/>
+    <Grid Background="#1E1F22">
+        <ListBox ItemsSource="{Binding Servers}" 
+                 SelectedItem="{Binding SelectedServer}"
+                 Background="Transparent" 
+                 BorderThickness="0"
+                 HorizontalAlignment="Center"
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,4">
+                        <Ellipse Width="48" Height="48" Fill="{Binding IconColor}" ToolTip="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name[0]}" 
+                                   Foreground="White" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center" 
+                                   FontWeight="Bold"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
     </Grid>
 </UserControl>

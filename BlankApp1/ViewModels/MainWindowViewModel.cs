@@ -13,20 +13,12 @@ namespace BlankApp1.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        private readonly IRegionManager _regionManager;
-
-        public DelegateCommand<string> NavigateCommand { get; }
-
         public MainWindowViewModel(IRegionManager regionManager)
         {
-            _regionManager = regionManager;
-            NavigateCommand = new DelegateCommand<string>(ExcuteNavigate);
+            regionManager.RegisterViewWithRegion("ServerListRegion", "MainWindowServerList");
+            regionManager.RegisterViewWithRegion("DMListRegion", "MainWindowDMList");
+            regionManager.RegisterViewWithRegion("ChatRegion", "MainWindowChat");
         }
 
-        private void ExcuteNavigate(string navigatePath)
-        {
-            if (string.IsNullOrEmpty(navigatePath)) return;
-            _regionManager.RequestNavigate("ContentRegion", navigatePath);
-        }
     }
 }
