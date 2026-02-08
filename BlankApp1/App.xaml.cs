@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using BlankApp1.Services;
 using BlankApp1.Views;
 using Prism.Ioc;
 
@@ -18,6 +19,8 @@ namespace BlankApp1
         {
             containerRegistry.RegisterForNavigation<MainWindowDMList>("PageA");
             containerRegistry.RegisterForNavigation<MainWindowServerList>("PageB");
+
+            containerRegistry.RegisterSingleton<IMessageService, MessageService>();
         }
     }
 }
