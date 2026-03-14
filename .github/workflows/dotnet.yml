@@ -1,0 +1,36 @@
+name: Build and Release WPF App
+
+on:
+  push:
+    branches: [ "main" ] # Runs whenever you push to main
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # We must use windows-latest because WPF is Windows-specific
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x # Matches your project version
+
+    - name: Restore Dependencies
+      run: dotnet restore
+
+    - name: Build and Publish (Self-Contained Single File)
+      # This command creates the exact .exe your friend needs
+      run: |
+        dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish
+
+    - name: Upload Artifact
+      # This saves the .exe on GitHub so you can download it from the Actions tab
+      uses: actions/upload-artifact@v4
+      with:
+        name: ChatApp-Windows-x64
+        path: ./publish/*.exe
