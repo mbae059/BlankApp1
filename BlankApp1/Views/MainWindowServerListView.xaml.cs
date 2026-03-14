@@ -18,9 +18,9 @@ namespace BlankApp1.Views
     /// <summary>
     /// Interaction logic for MainWindowServerList.xaml
     /// </summary>
-    public partial class MainWindowServerList : UserControl
+    public partial class MainWindowServerListView : UserControl
     {
-        public MainWindowServerList()
+        public MainWindowServerListView()
         {
             InitializeComponent();
         }

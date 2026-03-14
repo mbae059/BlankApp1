@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -7,11 +8,11 @@ namespace BlankApp1.Views
     /// <summary>
     /// Interaction logic for MainWindowChatHistory.xaml
     /// </summary>
-    public partial class MainWindowChatHistory : UserControl
+    public partial class MainWindowChatHistoryView : UserControl
     {
         private Point _scrollStartPoint;
         private double _scrollStartOffset;
-        public MainWindowChatHistory()
+        public MainWindowChatHistoryView()
         {
             InitializeComponent();
 
@@ -30,13 +31,27 @@ namespace BlankApp1.Views
             // Drag to scroll functionality
             ChatScrollViewer.PreviewMouseLeftButtonDown += (s, e) =>
             {
+                // If clicking on a TextBox, don't initiate drag-to-scroll to allow text selection
+                if (e.OriginalSource is TextBox) return;
+
                 _scrollStartPoint = e.GetPosition(this);
                 _scrollStartOffset = ChatScrollViewer.VerticalOffset;
-                ChatScrollViewer.CaptureMouse();
             };
 
             ChatScrollViewer.PreviewMouseMove += (s, e) =>
             {
+                if (e.LeftButton == MouseButtonState.Pressed && !ChatScrollViewer.IsMouseCaptured)
+                {
+                    // If clicking on a TextBox, don't initiate drag-to-scroll to allow text selection
+                    if (e.OriginalSource is TextBox) return;
+
+                    Point currentPoint = e.GetPosition(this);
+                    if (Math.Abs(currentPoint.Y - _scrollStartPoint.Y) > 5)
+                    {
+                        ChatScrollViewer.CaptureMouse();
+                    }
+                }
+
                 if (ChatScrollViewer.IsMouseCaptured)
                 {
                     Point currentPoint = e.GetPosition(this);

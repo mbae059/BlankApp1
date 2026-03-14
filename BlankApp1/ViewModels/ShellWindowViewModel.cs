@@ -4,7 +4,7 @@ using Prism.Navigation.Regions;
 
 namespace BlankApp1.ViewModels
 {
-    public class MainWindowViewModel : BindableBase
+    public class ShellWindowViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
         private string _title = "Hello Prism 9!";
@@ -14,13 +14,11 @@ namespace BlankApp1.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public MainWindowViewModel(IRegionManager regionManager)
+        public ShellWindowViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
 
-            _regionManager.RegisterViewWithRegion("ServerListRegion", "MainWindowServerList");
-            _regionManager.RegisterViewWithRegion("DMListRegion", "MainWindowDMList");
-            _regionManager.RegisterViewWithRegion("ChatRegion", "MainWindowChat");
+            _regionManager.RegisterViewWithRegion("MainRegion", "LoginView");
         }
 
     }

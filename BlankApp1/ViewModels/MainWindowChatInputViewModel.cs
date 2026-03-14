@@ -8,6 +8,7 @@ namespace BlankApp1.ViewModels
     public class MainWindowChatInputViewModel : BindableBase
     {
         private readonly IChatService _chatService;
+        private readonly IProfileService _profileService;
         private string _currentInput;
         public string CurrentInput
         {
@@ -17,9 +18,10 @@ namespace BlankApp1.ViewModels
 
         public DelegateCommand SendMessageCommand { get; }
 
-        public MainWindowChatInputViewModel(IChatService chatService)
+        public MainWindowChatInputViewModel(IChatService chatService, IProfileService profileService)
         {
             _chatService = chatService;
+            _profileService = profileService;
             CurrentInput = string.Empty;
 
             
@@ -27,15 +29,20 @@ namespace BlankApp1.ViewModels
             SendMessageCommand = new DelegateCommand(async () =>
             {
                 if (string.IsNullOrWhiteSpace(CurrentInput)) return; //No Input
-                if(_chatService.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected) return; //Not Connected
+                
+                if(_chatService.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+                {
+                    await _chatService.ConnectAsync();
+                    if (_chatService.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected) return;
+                }
 
                 MessagePayLoad messagePayLoad = new MessagePayLoad
                 {
-                    User = "User1", // Replace with actual user identifier
+                    User = _profileService.profile.UserName,
                     Message = CurrentInput,
                 };
 
-                await _chatService.SendMessageAsync(messagePayLoad); // Replace "User1" with actual user identifier
+                await _chatService.SendMessageAsync(messagePayLoad); 
                 CurrentInput = string.Empty; // Clear input after sending
             });
         }

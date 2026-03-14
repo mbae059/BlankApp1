@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace BlankApp1.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindowChat.xaml
+    /// Interaction logic for MainWindowDMList.xaml
     /// </summary>
-    public partial class MainWindowChat : UserControl
+    public partial class MainWindowDMListView : UserControl
     {
-        public MainWindowChat()
+        public MainWindowDMListView()
         {
             InitializeComponent();
         }

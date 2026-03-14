@@ -18,9 +18,9 @@ namespace BlankApp1.Views
     /// <summary>
     /// Interaction logic for MainWindowChatInput.xaml
     /// </summary>
-    public partial class MainWindowChatInput : UserControl
+    public partial class MainWindowChatInputView : UserControl
     {
-        public MainWindowChatInput()
+        public MainWindowChatInputView()
         {
             InitializeComponent();
         }
