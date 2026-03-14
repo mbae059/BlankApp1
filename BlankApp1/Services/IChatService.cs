@@ -1,4 +1,6 @@
 ﻿using BlankApp1.Models;
+using BlankApp1.Models.DTO;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,9 @@ namespace BlankApp1.Services
 {
     public interface IChatService
     {
-        void SendMessage(string user, string message);
-        event Action<ChatMessage> MessageReceived; // This "fires" when a friend types
+        Task ConnectAsync();
+        Task DisconnetAsync();
+        Task SendMessageAsync(MessagePayLoad messagePayLoad);
+        HubConnectionState State { get; }
     }
 }

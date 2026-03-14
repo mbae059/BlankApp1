@@ -20,6 +20,19 @@ namespace BlankApp1
             containerRegistry.RegisterForNavigation<MainWindowServerList>("MainWindowServerList");
             containerRegistry.RegisterForNavigation<MainWindowDMList>("MainWindowDMList");
             containerRegistry.RegisterForNavigation<MainWindowChat>("MainWindowChat");
+            containerRegistry.RegisterForNavigation<MainWindowChatHistory>("MainWindowChatHistory");
+            containerRegistry.RegisterForNavigation<MainWindowChatInput>("MainWindowChatInput");
+
+            containerRegistry.RegisterSingleton<IChatService, ChatService>();
+
+        }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            // Connect to the chat service when the application starts
+            var chatService = Container.Resolve<IChatService>();
+            chatService.ConnectAsync();
         }
     }
 }

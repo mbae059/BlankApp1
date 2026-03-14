@@ -4,7 +4,6 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
-
 namespace BlankApp1.ViewModels
 {
     public class MainWindowServerListViewModel : BindableBase

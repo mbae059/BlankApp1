@@ -6,6 +6,7 @@ namespace BlankApp1.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
+        private readonly IRegionManager _regionManager;
         private string _title = "Hello Prism 9!";
         public string Title
         {
@@ -15,9 +16,11 @@ namespace BlankApp1.ViewModels
 
         public MainWindowViewModel(IRegionManager regionManager)
         {
-            regionManager.RegisterViewWithRegion("ServerListRegion", "MainWindowServerList");
-            regionManager.RegisterViewWithRegion("DMListRegion", "MainWindowDMList");
-            regionManager.RegisterViewWithRegion("ChatRegion", "MainWindowChat");
+            _regionManager = regionManager;
+
+            _regionManager.RegisterViewWithRegion("ServerListRegion", "MainWindowServerList");
+            _regionManager.RegisterViewWithRegion("DMListRegion", "MainWindowDMList");
+            _regionManager.RegisterViewWithRegion("ChatRegion", "MainWindowChat");
         }
 
     }
