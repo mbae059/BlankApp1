@@ -7,6 +7,8 @@
     <ApplicationIcon>ico.ico</ApplicationIcon>
     <Title>Blank</Title>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <AssemblyTitle>Blank</AssemblyTitle>
+    <AssemblyName>Blank</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="ico.ico" />
@@ -17,5 +19,6 @@
     <PackageReference Include="Prism.Core" Version="9.0.537" />
     <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
     <PackageReference Include="Prism.Wpf" Version="9.0.537" />
+    <PackageReference Include="System.Drawing.Common" Version="10.0.5" />
   </ItemGroup>
 </Project>

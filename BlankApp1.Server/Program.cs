@@ -7,7 +7,11 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     serverOptions.ListenAnyIP(5237); // This binds to 0.0.0.0:5237
 });
 
-builder.Services.AddSignalR(); // 1. Add SignalR services
+builder.Services.AddSignalR(options =>
+{
+    options.MaximumReceiveMessageSize = 10 * 1024 * 1024; // 10MB
+    options.EnableDetailedErrors = true;
+}); // 1. Add SignalR services
 //builder.Services.AddCors(options =>
 //{
 //    options.AddPolicy("AllowAll", policy =>

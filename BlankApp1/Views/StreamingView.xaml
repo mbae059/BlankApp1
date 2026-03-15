@@ -1,0 +1,36 @@
+<UserControl x:Class="BlankApp1.Views.StreamingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="800">
+    <Grid Background="#2F3136">
+        <Border BorderBrush="#1E1F22" BorderThickness="0,0,0,1">
+            <Grid>
+                <Image Source="{Binding StreamSource}" Stretch="Uniform" />
+                
+                <TextBlock Text="SCREEN STREAMING AREA" Foreground="White" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           FontSize="20" FontWeight="Bold">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StreamSource}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                
+                <Button Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                        Margin="10" Background="Transparent" Foreground="#949BA4" 
+                        BorderThickness="0" Command="{Binding CloseStreamingCommand}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

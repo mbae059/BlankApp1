@@ -6,11 +6,13 @@
     
     <Grid Background="#1E1F22">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="ChatHistoryRegion" />
-        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ChatInputRegion" />
+        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="StreamingRegion" />
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ChatHistoryRegion" />
+        <ContentControl Grid.Row="2" prism:RegionManager.RegionName="ChatInputRegion" />
     </Grid>
 </UserControl>

@@ -7,7 +7,7 @@ namespace BlankApp1.ViewModels
     public class ShellWindowViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
-        private string _title = "Hello Prism 9!";
+        private string _title = "Blank";
         public string Title
         {
             get { return _title; }

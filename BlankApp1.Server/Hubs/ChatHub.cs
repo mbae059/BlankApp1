@@ -14,7 +14,10 @@ namespace BlankApp1.Server.Hubs
 
         public async Task SendVideoChunk(byte[] chunk)
         {
-            // Broadcasts the video byte stream to others
+            // Log the size to the server console for debugging
+            Console.WriteLine($"Received video chunk: {chunk?.Length ?? 0} bytes");
+
+            // Broadcasts the video byte stream to all other clients
             await Clients.Others.SendAsync("ReceiveVideoChunk", chunk);
         }
     }

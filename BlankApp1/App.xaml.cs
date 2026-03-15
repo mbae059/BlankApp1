@@ -32,8 +32,11 @@ namespace BlankApp1
             containerRegistry.RegisterForNavigation<MainWindowChatView>("MainWindowChat");
             containerRegistry.RegisterForNavigation<MainWindowChatHistoryView>("MainWindowChatHistory");
             containerRegistry.RegisterForNavigation<MainWindowChatInputView>("MainWindowChatInput");
+            containerRegistry.RegisterForNavigation<StreamingView>("StreamingView");
 
+            containerRegistry.RegisterSingleton<ISignalRService, SignalRService>();
             containerRegistry.RegisterSingleton<IChatService, ChatService>();
+            containerRegistry.RegisterSingleton<IVideoService, VideoService>();
             containerRegistry.RegisterSingleton<IProfileService, ProfileService>();
         }
 
@@ -57,9 +60,9 @@ namespace BlankApp1
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            // Connect to the chat service when the application starts
-            var chatService = Container.Resolve<IChatService>();
-            chatService.ConnectAsync();
+            // Connect to the SignalR hub when the application starts
+            var signalRService = Container.Resolve<ISignalRService>();
+            signalRService.ConnectAsync();
         }
     }
 }

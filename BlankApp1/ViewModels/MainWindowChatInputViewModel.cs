@@ -30,12 +30,6 @@ namespace BlankApp1.ViewModels
             {
                 if (string.IsNullOrWhiteSpace(CurrentInput)) return; //No Input
                 
-                if(_chatService.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
-                {
-                    await _chatService.ConnectAsync();
-                    if (_chatService.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected) return;
-                }
-
                 MessagePayLoad messagePayLoad = new MessagePayLoad
                 {
                     User = _profileService.profile.UserName,
