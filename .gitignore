@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/BlankApp1/ffmpeg.exe
+/BlankApp1/ffplay.exe
+/BlankApp1/ffprobe.exe

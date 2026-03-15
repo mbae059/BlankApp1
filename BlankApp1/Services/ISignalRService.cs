@@ -5,13 +5,19 @@ using System.Threading.Tasks;
 
 namespace BlankApp1.Services
 {
+    public enum HubType
+    {
+        Chat,
+        Stream
+    }
+
     public interface ISignalRService
     {
-        HubConnectionState State { get; }
-        Task ConnectAsync();
-        Task DisconnectAsync();
-        Task SendAsync(string methodName, object arg1, CancellationToken cancellationToken = default);
-        Task InvokeAsync(string methodName, object arg1, CancellationToken cancellationToken = default);
-        IDisposable On<T>(string methodName, Action<T> handler);
+        HubConnectionState GetState(HubType hubType);
+        Task ConnectAsync(HubType hubType);
+        Task DisconnectAsync(HubType hubType);
+        Task SendAsync(HubType hubType, string methodName, object arg1, CancellationToken cancellationToken = default);
+        Task InvokeAsync(HubType hubType, string methodName, object arg1, CancellationToken cancellationToken = default);
+        IDisposable On<T>(HubType hubType, string methodName, Action<T> handler);
     }
 }

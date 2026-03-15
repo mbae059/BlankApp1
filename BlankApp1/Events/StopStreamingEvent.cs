@@ -2,7 +2,7 @@ using Prism.Events;
 
 namespace BlankApp1.Events
 {
-    public class StopStreamingEvent : PubSubEvent<string>
+    public class StopStreamingEvent : PubSubEvent
     {
     }
 }

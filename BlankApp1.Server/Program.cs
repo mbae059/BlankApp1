@@ -11,22 +11,12 @@ builder.Services.AddSignalR(options =>
 {
     options.MaximumReceiveMessageSize = 10 * 1024 * 1024; // 10MB
     options.EnableDetailedErrors = true;
-}); // 1. Add SignalR services
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowAll", policy =>
-//    {
-//        policy.AllowAnyHeader()
-//              .AllowAnyMethod()
-//              .SetIsOriginAllowed(_ => true) // Allow any origin
-//              .AllowCredentials();
-//    });
-//});
-
+}).AddMessagePackProtocol(); // Enable binary protocol
 
 var app = builder.Build();
-//app.UseCors("AllowAll");
-app.MapGet("/", () => "Server is Running! SignalR is waiting at /chathub");
-app.MapHub<ChatHub>("/chathub"); // 2. Create the "Portal" address
+
+app.MapGet("/", () => "Server is Running! SignalR is waiting at /chathub and /streamhub");
+app.MapHub<ChatHub>("/chathub");
+app.MapHub<StreamHub>("/streamhub");
 
 app.Run();

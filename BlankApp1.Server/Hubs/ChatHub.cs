@@ -5,20 +5,23 @@ namespace BlankApp1.Server.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(MessagePayLoad messagePayLoad)
+        public override async Task OnConnectedAsync()
         {
-            messagePayLoad.Timestamp = DateTime.UtcNow; // Add timestamp on the server side
-            // This takes a message from one friend and blasts it to everyone else
-            await Clients.All.SendAsync("ReceiveMessage", messagePayLoad);
+            Console.WriteLine($"[ChatHub] Client Connected: {Context.ConnectionId}");
+            await base.OnConnectedAsync();
         }
 
-        public async Task SendVideoChunk(byte[] chunk)
+        public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            // Log the size to the server console for debugging
-            Console.WriteLine($"Received video chunk: {chunk?.Length ?? 0} bytes");
+            Console.WriteLine($"[ChatHub] Client Disconnected: {Context.ConnectionId}");
+            await base.OnDisconnectedAsync(exception);
+        }
 
-            // Broadcasts the video byte stream to all other clients
-            await Clients.Others.SendAsync("ReceiveVideoChunk", chunk);
+        public async Task SendMessage(MessagePayLoad messagePayLoad)
+        {
+            Console.WriteLine($"[Chat] {messagePayLoad.User}: {messagePayLoad.Message}");
+            messagePayLoad.Timestamp = DateTime.UtcNow;
+            await Clients.All.SendAsync("ReceiveMessage", messagePayLoad);
         }
     }
 }

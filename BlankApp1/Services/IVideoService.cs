@@ -6,5 +6,6 @@ namespace BlankApp1.Services
     public interface IVideoService
     {
         Task SendVideoChunkAsync(byte[] chunk, CancellationToken cancellationToken = default);
+        Task StopStreamingAsync(CancellationToken cancellationToken = default);
     }
 }

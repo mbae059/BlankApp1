@@ -3,6 +3,7 @@ using Prism.Mvvm;
 using Prism.Navigation.Regions;
 using Prism.Events;
 using BlankApp1.Events;
+using Prism.Navigation;
 
 namespace BlankApp1.ViewModels
 {
@@ -24,14 +25,15 @@ namespace BlankApp1.ViewModels
 
         private void OnStartStreaming()
         {
-            _regionManager.RequestNavigate("StreamingRegion", "StreamingView");
+            var parameters = new NavigationParameters { { "isStreamer", true } };
+            _regionManager.RequestNavigate("StreamingRegion", "StreamingView", parameters);
         }
 
         private void OnStopStreaming()
         {
             if (_regionManager.Regions.ContainsRegionWithName("StreamingRegion"))
             {
-                _eventAggregator.GetEvent<StopStreamingEvent>().Publish("stop");
+                _eventAggregator.GetEvent<StopStreamingEvent>().Publish();
                 _regionManager.Regions["StreamingRegion"].RemoveAll();
             }
         }

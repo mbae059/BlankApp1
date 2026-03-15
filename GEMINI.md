@@ -10,15 +10,15 @@ Projects
 - BlankApp1 
 -- The main project, which will be the WPF application using Prism
 -- Uses .NET 8.0, C# 12.0, Prism 9.0.537
+-- Be able to send messages and stream videos
+-- The resolution shall be chosen as the user desire
 
 - BlankApp1.Server
 -- The server project, which will handle the backend logic and communication for the chat program
 -- Uses .NET 8.0, C# 12.0, ASP.NET Core, SignalR
 -- This project will be responsible for managing chat, videos, and other real-time communication features
-
+-- The server keeps track of the data transfered on the console
 
 Problems to solve
 ----
-- When pressing the start button in MainWindowDMListView, starts to stream the desktop to the other user in the chat
-- This is fine but when the user clicks the stop button, the stream should stop.
-- streamRegion is replaced so the user cannot see the screen but the communication is still active, wasting resources and bandwidth. The stream should be properly stopped to free up resources and reduce bandwidth usage.
+- Use AV1 codec to stream and play for efficiency

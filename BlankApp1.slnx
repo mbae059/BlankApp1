@@ -1,16 +1,16 @@
 <Solution>
   <Configurations>
-    <Platform Name="Any CPU" />
     <Platform Name="x64" />
   </Configurations>
   <Folder Name="/Solution Items/">
     <File Path="GEMINI.md" />
     <File Path="README.md" />
   </Folder>
-  <Project Path="BlankApp1.Server/BlankApp1.Server.csproj" Id="639d24eb-1356-4525-a31e-aa9eeb6e8678">
-    <Platform Solution="Debug|x64" Project="x64" />
+  <Project Path="BlankApp1.Server/BlankApp1.Server.csproj">
+    <Platform Project="x64" />
   </Project>
   <Project Path="BlankApp1/BlankApp1.csproj">
-    <Platform Solution="*|x64" Project="x64" />
+    <BuildDependency Project="BlankApp1.Server/BlankApp1.Server.csproj" />
+    <Platform Project="x64" />
   </Project>
 </Solution>

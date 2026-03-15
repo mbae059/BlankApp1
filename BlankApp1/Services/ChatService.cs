@@ -20,7 +20,7 @@ namespace BlankApp1.Services
             _logger = logger;
 
             // SRP: ChatService handles chat-specific hub events
-            _signalRService.On<MessagePayLoad>("ReceiveMessage", (messagePayLoad) =>
+            _signalRService.On<MessagePayLoad>(HubType.Chat, "ReceiveMessage", (messagePayLoad) =>
             {
                 // Convert UTC timestamp from server to local time for display
                 messagePayLoad.Timestamp = messagePayLoad.Timestamp.ToLocalTime();
@@ -34,11 +34,11 @@ namespace BlankApp1.Services
         {
             try
             {
-                if (_signalRService.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+                if (_signalRService.GetState(HubType.Chat) != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
                 {
-                    await _signalRService.ConnectAsync();
+                    await _signalRService.ConnectAsync(HubType.Chat);
                 }
-                await _signalRService.SendAsync("SendMessage", messagePayLoad);
+                await _signalRService.SendAsync(HubType.Chat, "SendMessage", messagePayLoad);
             }
             catch (Exception ex)
             {

@@ -60,9 +60,10 @@ namespace BlankApp1
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            // Connect to the SignalR hub when the application starts
+            // Connect to both SignalR hubs when the application starts
             var signalRService = Container.Resolve<ISignalRService>();
-            signalRService.ConnectAsync();
+            signalRService.ConnectAsync(HubType.Chat);
+            signalRService.ConnectAsync(HubType.Stream);
         }
     }
 }
